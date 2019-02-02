@@ -21,35 +21,38 @@ export default class Dashboard extends React.Component {
       
     }
 
-    onAnswer(value) {
-      
-      console.log(this.state.answer)
+    onAnswer(e) {
+      e.preventDefault()
       let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
-      this.setState({
-        questionNumber: this.state.questionNumber + 1
-      })
-      console.log(this.state.questionNumber)
+      console.log('this.state.answer ' + this.state.answer, 'correctanswer' + correctAnswer)
+      if (this.state.answer === correctAnswer) {
+        this.setState({correct: this.state.correct+1, questionNumber: this.state.questionNumber+1})
+      }
+      else {
+        this.setState({incorrect: this.state.incorrect+1, questionNumber: this.state.questionNumber+1})
+      }
+
     }
     
     
     render() {
         let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question
-        let currentAnswer1 = QUESTIONS_LIST[this.state.questionNumber].answers[0]
-        let currentAnswer2 = QUESTIONS_LIST[this.state.questionNumber].answers[1]
-        let currentAnswer3 = QUESTIONS_LIST[this.state.questionNumber].answers[2]
-        let currentAnswer4 = QUESTIONS_LIST[this.state.questionNumber].answers[3]
+        let currentAnswerChoices = []
+        for (let i=0; i<QUESTIONS_LIST[this.state.questionNumber].answers.length; i++) {
+          currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
+        }
         
         return (
           
           <div>
             <Question question={currentQuestion} />
-            <button value={currentAnswer1} onClick={e => this.onAnswer(e)}>{currentAnswer1}</button>
-            <button value={currentAnswer2} onClick={e => this.onAnswer(e)}>{currentAnswer2}</button>
-            <button value={currentAnswer3} onClick={e => {
-              this.setState({answer: currentAnswer3})
-              this.onAnswer(e)
-            }}>{currentAnswer3}</button>
-            <button value={currentAnswer4} onClick={e => this.onAnswer(e)}>{currentAnswer4}</button>
+            {currentAnswerChoices.map((answer, index) => {
+              return <button key={index} value={answer} onClick={(e) => {
+                this.setState({answer: answer}); 
+                this.onAnswer(e)
+              }}>{answer}</button>
+            })}  
+            
           </div>
         )
       
