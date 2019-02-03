@@ -11,20 +11,24 @@ export default class Dashboard extends React.Component {
             incorrect: 0,
             questionNumber: 0,
             answer: '',
-            showQuestion: true
+            showQuestion: true,
+            answerCorrect: false,
+            correctAnswer: ''
         }
     }
 
     showQuestion() {
       while (this.state.incorrect + this.state.correct !== QUESTIONS_LIST.length) {
         let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question
-          let currentAnswerChoices = []
-          for (let i=0; i<QUESTIONS_LIST[this.state.questionNumber].answers.length; i++) {
-            currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
-          }
-          
+        let currentAnswerChoices = []
+        for (let i=0; i<QUESTIONS_LIST[this.state.questionNumber].answers.length; i++) {
+          currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
+        }
+        if (this.state.showQuestion !== true) {
+          return this.showAnswer()    
+        }
+        else {
           return (
-            
             <div>
               <Question question={currentQuestion} />
               {currentAnswerChoices.map((answer, index) => {
@@ -36,6 +40,7 @@ export default class Dashboard extends React.Component {
               
             </div>
           )
+        }
       }
             
     }
@@ -43,11 +48,11 @@ export default class Dashboard extends React.Component {
     onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
       if (this.state.answer === correctAnswer) {
-        this.setState({correct: this.state.correct+1, questionNumber: this.state.questionNumber+1}, () => this.rightAnswer()
+        this.setState({correctAnswer: correctAnswer, correct: this.state.correct+1, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
         )
       }
       else {
-        this.setState({incorrect: this.state.incorrect+1, questionNumber: this.state.questionNumber+1}, () => this.wrongAnswer()
+        this.setState({correctAnswer: correctAnswer, incorrect: this.state.incorrect+1, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
       
         );
       }
@@ -57,28 +62,25 @@ export default class Dashboard extends React.Component {
  
     
 
-    /*rightAnswer() {
-      if (this.state.showQuestion === false) {
+    showAnswer() {
+      if (this.state.answerCorrect === true) {
+        return (
+            <div>
+              <p>Correct!</p>
+              <button onClick={() => this.setState({showQuestion: true})}>Next</button>
+            </div>
+
+          )
+      }
+      else {
         return (
           <div>
-            <p>Correct!</p>
-            <button onClick={() => this.setState({showQuestion: true})}></button>
+            <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
+            <button onClick={() => this.setState({showQuestion: true})}>Next</button>
           </div>
-
         )
       }
     }
-
-    wrongAnswer() {
-      if (this.state.showQuestion === false) {
-        return (
-          <div>
-            <p>Wrong.</p>
-            <button onClick={() => this.setState({showQuestion: true})}></button>
-          </div>
-        )
-      }
-    }*/
 
     finalScore() {
       return (
