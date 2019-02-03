@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
+import Title from './components/title';
 import Dashboard from './components/dashboard'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props) 
+    this.state = {
+      gamePlay: false
+    }
+  }
+
+  startGame() {
+    this.setState({gamePlay: true})
   }
   
   render() {
-    return (
+    if (this.state.gamePlay === false) {
+      return (
+        <div>
+          <Title startGame={() => this.startGame()} />
+        </div>
+      )
+    }
+    else {
+      return (
       <div>
-        <header>
-          State Capital Quiz
-        </header>
         <Dashboard />
       </div>
-    );
+      );
+    }
   }
 }
 
