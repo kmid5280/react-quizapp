@@ -14,15 +14,8 @@ export default class Dashboard extends React.Component {
            
         }
     }
-    
-    renderQuestion() {
-      let n = this.state.questionNumber
-      
-      
-    }
 
-    onAnswer(e) {
-      e.preventDefault()
+    onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
       console.log('this.state.answer ' + this.state.answer, 'correctanswer' + correctAnswer)
       if (this.state.answer === correctAnswer) {
@@ -33,7 +26,6 @@ export default class Dashboard extends React.Component {
       }
 
     }
-    
     
     render() {
         let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question
@@ -47,11 +39,12 @@ export default class Dashboard extends React.Component {
           <div>
             <Question question={currentQuestion} />
             {currentAnswerChoices.map((answer, index) => {
-              return <button key={index} value={answer} onClick={(e) => {
-                this.setState({answer: answer}); 
-                this.onAnswer(e)
-              }}>{answer}</button>
-            })}  
+              return <button key={index} value={answer} onClick={() => {
+                this.setState({answer: answer}, () => this.onAnswer())
+                }}>{answer}</button>
+            })}
+            <p>Correct: {this.state.correct}</p>
+            <p>Incorrect: {this.state.incorrect}</p>
             
           </div>
         )
