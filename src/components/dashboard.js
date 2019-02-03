@@ -57,7 +57,7 @@ export default class Dashboard extends React.Component {
  
     
 
-    rightAnswer() {
+    /*rightAnswer() {
       if (this.state.showQuestion === false) {
         return (
           <div>
@@ -78,7 +78,7 @@ export default class Dashboard extends React.Component {
           </div>
         )
       }
-    }
+    }*/
 
     finalScore() {
       return (
