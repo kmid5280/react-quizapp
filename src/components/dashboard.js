@@ -85,6 +85,7 @@ export default class Dashboard extends React.Component {
         <div>
             <p>Correct: {this.state.correct}</p>
             <p>Incorrect: {this.state.incorrect}</p>
+            <button onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0})}>Play again?</button>
         </div>
       )
     }
