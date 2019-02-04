@@ -1,6 +1,7 @@
 import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import Question from './question'
+import ShowAnswer from './show-answer'
 
 export default class Dashboard extends React.Component {
 
@@ -17,49 +18,51 @@ export default class Dashboard extends React.Component {
         }
     }
 
-    showQuestion() {
-      while (this.state.incorrect + this.state.correct !== QUESTIONS_LIST.length) {
-        let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question
+    showQuestion() {        
+      if (this.state.showQuestion !== true) {
+        return this.showAnswer()    
+      }
+      else {
+        let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question || ''
         let currentAnswerChoices = []
         for (let i=0; i<QUESTIONS_LIST[this.state.questionNumber].answers.length; i++) {
           currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
         }
-        if (this.state.showQuestion !== true) {
-          return this.showAnswer()    
-        }
-        else {
-          return (
-            <div>
-              <Question question={currentQuestion} />
-              {currentAnswerChoices.map((answer, index) => {
-                return <button key={index} value={answer} onClick={() => {
-                  this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
-                  }}>{answer}</button>
-              })}
+        return (
+          <div>
+            <Question question={currentQuestion} />
+            {currentAnswerChoices.map((answer, index) => {
+              return <button key={index} value={answer} onClick={() => {
+                this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
+                }}>{answer}</button>
+            })}
+          
             
-              
-            </div>
-          )
-        }
+          </div>
+        )
       }
+      
             
     }
 
     onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
       if (this.state.answer === correctAnswer) {
-        this.setState({correctAnswer: correctAnswer, correct: this.state.correct+1, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
+        this.setState({correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
         )
       }
       else {
-        this.setState({correctAnswer: correctAnswer, incorrect: this.state.incorrect+1, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
-      
-        );
+        this.setState({correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
+      );
       }
      
     }
 
- 
+    setShowQuestion() {
+      this.setState({
+        showQuestion: true
+      })
+    }
     
 
     showAnswer() {
@@ -67,7 +70,9 @@ export default class Dashboard extends React.Component {
         return (
             <div>
               <p>Correct!</p>
-              <button onClick={() => this.setState({showQuestion: true})}>Next</button>
+              <button onClick={() => this.setState({correct: this.state.correct+1, showQuestion: true})}>Next</button>
+
+              {/*<button onClick={() => this.setState({showQuestion: true})}>Next</button>*/}
             </div>
 
           )
@@ -76,7 +81,7 @@ export default class Dashboard extends React.Component {
         return (
           <div>
             <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
-            <button onClick={() => this.setState({showQuestion: true})}>Next</button>
+            <button onClick={() => this.setState({incorrect: this.state.incorrect+1, showQuestion: true})}>Next</button>
           </div>
         )
       }
@@ -94,6 +99,7 @@ export default class Dashboard extends React.Component {
     
     render() {
       if (this.state.correct + this.state.incorrect === QUESTIONS_LIST.length) {
+      
         return this.finalScore()
       }
       else {
