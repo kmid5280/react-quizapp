@@ -11,6 +11,7 @@ export default class Dashboard extends React.Component {
             correct: 0,
             incorrect: 0,
             questionNumber: 0,
+            answeredQuestions: 0,
             answer: '',
             showQuestion: true,
             answerCorrect: false,
@@ -48,11 +49,11 @@ export default class Dashboard extends React.Component {
     onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
       if (this.state.answer === correctAnswer) {
-        this.setState({correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
+        this.setState({correct: this.state.correct+1, correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
         )
       }
       else {
-        this.setState({correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
+        this.setState({incorrect: this.state.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
       );
       }
      
@@ -70,9 +71,7 @@ export default class Dashboard extends React.Component {
         return (
             <div>
               <p>Correct!</p>
-              <button onClick={() => this.setState({correct: this.state.correct+1, showQuestion: true})}>Next</button>
-
-              {/*<button onClick={() => this.setState({showQuestion: true})}>Next</button>*/}
+              <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
             </div>
 
           )
@@ -81,7 +80,7 @@ export default class Dashboard extends React.Component {
         return (
           <div>
             <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
-            <button onClick={() => this.setState({incorrect: this.state.incorrect+1, showQuestion: true})}>Next</button>
+            <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
           </div>
         )
       }
@@ -92,13 +91,13 @@ export default class Dashboard extends React.Component {
         <div>
             <p>Correct: {this.state.correct}</p>
             <p>Incorrect: {this.state.incorrect}</p>
-            <button onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0})}>Play again?</button>
+            <button onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
         </div>
       )
     }
     
     render() {
-      if (this.state.correct + this.state.incorrect === QUESTIONS_LIST.length) {
+      if (this.state.answeredQuestions === QUESTIONS_LIST.length) {
       
         return this.finalScore()
       }
