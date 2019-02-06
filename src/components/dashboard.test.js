@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {shallow, mount} from 'enzyme'
 import Dashboard from './dashboard';
+import {QUESTIONS_LIST} from './questions-list'
 
 it('renders without crashing', () => {
   shallow(<Dashboard />)
@@ -26,4 +27,10 @@ it('should display answer screen when answer clicked', () => {
     const findButton = wrapper.find('.dashboard-answer-button')
     findButton.at(generateRandom(0,4)).simulate('click')
     expect(wrapper.find('.show-answer')).toHaveLength(1)
+})
+
+it('should display a final score screen after all questions have been answered', () => {
+    const wrapper = mount(<Dashboard/>)
+    wrapper.setState({answeredQuestions: QUESTIONS_LIST.length})
+    expect(wrapper.find('.final-score')).toHaveLength(1)
 })
