@@ -30,10 +30,10 @@ export default class Dashboard extends React.Component {
           currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
         }
         return (
-          <div>
+          <div className='question-wrapper'>
             <Question question={currentQuestion} />
             {currentAnswerChoices.map((answer, index) => {
-              return <button key={index} value={answer} onClick={() => {
+              return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
                 this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
                 }}>{answer}</button>
             })}
@@ -69,7 +69,7 @@ export default class Dashboard extends React.Component {
     showAnswer() {
       if (this.state.answerCorrect === true) {
         return (
-            <div>
+            <div className="show-answer">
               <p>Correct!</p>
               <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
             </div>
@@ -78,7 +78,7 @@ export default class Dashboard extends React.Component {
       }
       else {
         return (
-          <div>
+          <div className="show-answer">
             <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
             <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
           </div>
