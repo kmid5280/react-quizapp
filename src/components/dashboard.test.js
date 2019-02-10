@@ -19,7 +19,7 @@ it('should display four answer buttons', () => {
     expect(findButtons).toHaveLength(4)
 })
 
-it('should display answer screen when answer clicked', () => {
+it('should display answer screen when answer button clicked', () => {
     function generateRandom(min, max) {
         return Math.floor(Math.random() * (max-min) + min)
     }
