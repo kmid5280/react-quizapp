@@ -34,3 +34,10 @@ it('should display a final score screen after all questions have been answered',
     wrapper.setState({answeredQuestions: QUESTIONS_LIST.length})
     expect(wrapper.find('.final-score')).toHaveLength(1)
 })
+
+it('should reset the game when button on final score screen clicked', () => {
+    const wrapper = mount(<Dashboard/>)
+    wrapper.setState({answeredQuestions: QUESTIONS_LIST.length})
+    wrapper.find('.dashboard-playagain-button').simulate('click')
+    expect(wrapper.find('.question-wrapper')).toHaveLength(1)
+}) 
