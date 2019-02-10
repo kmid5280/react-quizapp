@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       gamePlay: false
     }
+    this.startGame = this.startGame.bind(this)
   }
 
   startGame() {
