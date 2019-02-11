@@ -1,6 +1,5 @@
 import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
-import Question from './question'
 import './dashboard.css'
 
 export default class Dashboard extends React.Component {
