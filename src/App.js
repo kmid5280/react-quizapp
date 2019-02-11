@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Helmet} from 'react-helmet'
+import Helmet from 'react-helmet'
 import MetaTags from 'react-meta-tags'
 import Title from './components/title';
 import Dashboard from './components/dashboard'
