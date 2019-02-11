@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo|Passion+One" rel="stylesheet');
+
 body {
-  background-color: gray
+  background-color: #224367;
+  color: white;
+  font-family: 'Passion One', cursive;
 }
