@@ -23,7 +23,7 @@ class App extends Component {
       return (
         <div>
           <Helmet>
-            <html lang={this.state.lang}/>
+            <html lang={this.state.lang} />
           </Helmet>
           <Title startGame={() => this.startGame()} />
         </div>
