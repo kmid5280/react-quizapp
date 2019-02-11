@@ -32,12 +32,14 @@ export default class Dashboard extends React.Component {
         return (
           <div className='question-wrapper'>
             <main role="main" aria-live="polite">
-              <Question question={currentQuestion} />
-              {currentAnswerChoices.map((answer, index) => {
-                return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
-                  this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
-                  }}>{answer}</button>
-              })}
+              <h1 className="current-question">{currentQuestion}</h1>
+              <div className="answer-buttons-wrapper">
+                {currentAnswerChoices.map((answer, index) => {
+                  return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
+                    this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
+                    }}>{answer}</button>
+                })}
+              </div>
             </main>  
           </div>
         )
@@ -71,8 +73,8 @@ export default class Dashboard extends React.Component {
         return (
             <div className="show-answer">
               <main role="main" aria-live="polite">
-                <p>Correct!</p>
-                <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+                <p className="showanswer-header">Correct!</p>
+                <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
               </main>
             </div>
 
@@ -82,8 +84,8 @@ export default class Dashboard extends React.Component {
         return (
           <div className="show-answer">
             <main role="main" aria-live="polite">
-              <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
-              <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+              <p className="showanswer-header">Wrong. The correct answer is {this.state.correctAnswer}.</p>
+              <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
             </main>
           </div>
         )
