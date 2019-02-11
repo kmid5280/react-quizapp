@@ -30,7 +30,7 @@ export default class Dashboard extends React.Component {
         }
         return (
           <div className='question-wrapper'>
-            <main role="main">
+            <main role="main" aria-live="polite">
               <Question question={currentQuestion} />
               {currentAnswerChoices.map((answer, index) => {
                 return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
@@ -69,7 +69,7 @@ export default class Dashboard extends React.Component {
       if (this.state.answerCorrect === true) {
         return (
             <div className="show-answer">
-              <main role="main">
+              <main role="main" aria-live="polite">
                 <p>Correct!</p>
                 <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
               </main>
@@ -80,7 +80,7 @@ export default class Dashboard extends React.Component {
       else {
         return (
           <div className="show-answer">
-            <main role="main">
+            <main role="main" aria-live="polite">
               <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
               <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
             </main>
@@ -92,7 +92,7 @@ export default class Dashboard extends React.Component {
     finalScore() {
       return (
         <div className='final-score'>
-            <main role="main">
+            <main role="main" aria-live="polite">
               <p>Correct: {this.state.correct}</p>
               <p>Incorrect: {this.state.incorrect}</p>
               <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
