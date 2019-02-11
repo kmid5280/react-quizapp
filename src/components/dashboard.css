@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Arimo|Passion+One');
 
+body {
+    padding: 20px;
+}
+
+.question-wrapper {
+    margin-bottom: 50px;
+}
+
 .current-question, .showanswer-header {
     margin-top: 75px;
     text-align: center;
@@ -97,4 +105,11 @@
 .dashboard-playagain-button:hover {
     background-color: gray;
     border: 1px solid gray;
+}
+
+@media only screen and (max-width: 620px) {
+    .answer-buttons-wrapper, .showanswer-next-button {
+        width: 75%;
+
+    }
 }
