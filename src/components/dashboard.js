@@ -30,14 +30,14 @@ export default class Dashboard extends React.Component {
         }
         return (
           <div className='question-wrapper'>
-            <Question question={currentQuestion} />
-            {currentAnswerChoices.map((answer, index) => {
-              return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
-                this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
-                }}>{answer}</button>
-            })}
-          
-            
+            <main role="main">
+              <Question question={currentQuestion} />
+              {currentAnswerChoices.map((answer, index) => {
+                return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
+                  this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
+                  }}>{answer}</button>
+              })}
+            </main>  
           </div>
         )
       }
@@ -69,8 +69,10 @@ export default class Dashboard extends React.Component {
       if (this.state.answerCorrect === true) {
         return (
             <div className="show-answer">
-              <p>Correct!</p>
-              <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+              <main role="main">
+                <p>Correct!</p>
+                <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+              </main>
             </div>
 
           )
@@ -78,8 +80,10 @@ export default class Dashboard extends React.Component {
       else {
         return (
           <div className="show-answer">
-            <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
-            <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+            <main role="main">
+              <p>Wrong. The correct answer is {this.state.correctAnswer}.</p>
+              <button onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+            </main>
           </div>
         )
       }
@@ -88,9 +92,11 @@ export default class Dashboard extends React.Component {
     finalScore() {
       return (
         <div className='final-score'>
-            <p>Correct: {this.state.correct}</p>
-            <p>Incorrect: {this.state.incorrect}</p>
-            <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
+            <main role="main">
+              <p>Correct: {this.state.correct}</p>
+              <p>Incorrect: {this.state.incorrect}</p>
+              <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
+            </main>
         </div>
       )
     }
