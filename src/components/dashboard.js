@@ -94,10 +94,10 @@ export default class Dashboard extends React.Component {
 
     finalScore() {
       return (
-        <div className='final-score'>
+        <div className='final-score-wrapper'>
             <main role="main" aria-live="polite">
-              <p>Correct: {this.state.correct}</p>
-              <p>Incorrect: {this.state.incorrect}</p>
+              <p className="correct-score">Correct: {this.state.correct}</p>
+              <p className="incorrect-score">Incorrect: {this.state.incorrect}</p>
               <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
             </main>
         </div>

@@ -1,3 +1,29 @@
-body {
-    text-align: center
+@import url('https://fonts.googleapis.com/css?family=Arimo|Passion+One" rel="stylesheet');
+
+.header-title {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 54px;
+    font-family: 'Passion One', cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.start-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.2s;
+}
+
+.start-button:hover {
+    background-color: grey;
+
 }
