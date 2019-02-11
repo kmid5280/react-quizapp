@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo|Passion+One');
+
+body {
+    font-family: 'Arimo', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
