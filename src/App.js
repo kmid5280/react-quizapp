@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
 import MetaTags from 'react-meta-tags'
+import {connect} from 'react-redux'
 import Title from './components/title';
 import Dashboard from './components/dashboard'
 import './App.css';
@@ -31,7 +32,8 @@ class App extends Component {
           <Helmet>
             <html lang={this.state.lang} />
           </Helmet>
-          <Title startGame={() => this.startGame()} />
+          {/*<Title startGame={() => this.startGame()} />*/}
+          <Title startGame={() => this.dispatch} />
         </div>
       )
     }
@@ -53,4 +55,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  
+})
+
+export default connect()(App);
