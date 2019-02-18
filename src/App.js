@@ -5,9 +5,10 @@ import {connect} from 'react-redux'
 import Title from './components/title';
 import Dashboard from './components/dashboard'
 import './App.css';
+import {startGame} from './actions'
 
 class App extends Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props) 
     this.state = {
       lang: 'en',
@@ -18,11 +19,11 @@ class App extends Component {
 
   startGame() {
     this.setState({gamePlay: true})
-  }
+  }*/
   
   render() {
-    
-    if (this.state.gamePlay === false) {
+    console.log(this.props.gamePlay)
+    if (this.props.gamePlay === false) {
       return (
         <div>
           <MetaTags>
@@ -30,14 +31,14 @@ class App extends Component {
             <meta id="meta-keywords" name="keywords" content="Quiz, React, State Capital, United States, USA" />
           </MetaTags>
           <Helmet>
-            <html lang={this.state.lang} />
+            <html lang={this.props.lang} />
           </Helmet>
           {/*<Title startGame={() => this.startGame()} />*/}
-          <Title startGame={() => this.dispatch} />
+          <Title startGame={() => this.props.dispatch(startGame())} />
         </div>
       )
     }
-    else {
+    else if (this.props.gamePlay === true) {
       return (
       <div>
         <MetaTags>
@@ -46,7 +47,7 @@ class App extends Component {
           <meta name="keywords" content="Quiz, React, State Capital, United States, USA" />
         </MetaTags>
         <Helmet>
-          <html lang={this.state.lang} />
+          <html lang={this.props.lang} />
         </Helmet>
         <Dashboard />
       </div>
@@ -56,7 +57,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  
+  lang: state.lang,
+  gamePlay: state.gamePlay
 })
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
