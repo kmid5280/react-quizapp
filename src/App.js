@@ -8,19 +8,7 @@ import './App.css';
 import {startGame} from './actions'
 
 class App extends Component {
-  /*constructor(props) {
-    super(props) 
-    this.state = {
-      lang: 'en',
-      gamePlay: false
-    }
-    this.startGame = this.startGame.bind(this)
-  }
-
-  startGame() {
-    this.setState({gamePlay: true})
-  }*/
-  
+    
   render() {
     console.log(this.props.gamePlay)
     if (this.props.gamePlay === false) {
