@@ -1,10 +1,11 @@
 import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
+import { connect } from 'http2';
 
 export default class Dashboard extends React.Component {
 
-  constructor(props) {
+  /*constructor(props) {
         super(props)
         this.state = {
             correct: 0,
@@ -16,11 +17,12 @@ export default class Dashboard extends React.Component {
             answerCorrect: false,
             correctAnswer: ''
         }
-    }
+    }*/
 
     showQuestion() {        
       if (this.state.showQuestion !== true) {
-        return this.showAnswer()    
+        //return this.showAnswer()
+        return this.dispatch(showAnswer())
       }
       else {
         let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question || ''
@@ -114,3 +116,16 @@ export default class Dashboard extends React.Component {
       
     }
 }
+
+const mapStateToProps = state => ({
+  correct: state.correct,
+  incorrect: state.correct,
+  questionNumber: state.questionNumber,
+  answeredQuestions: state.answeredQuestions,
+  answer: state.answer,
+  showQuestion: state.showQuestion,
+  answerCorrect: state.answerCorrect,
+  correctAnswer: state.correctAnswer
+})
+
+export default connect(mapStateToProps)(Dashboard)
