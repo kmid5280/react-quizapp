@@ -7,7 +7,7 @@ export default class Dashboard extends React.Component {
 
   /*constructor(props) {
         super(props)
-        this.state = {
+        this.props = {
             correct: 0,
             incorrect: 0,
             questionNumber: 0,
@@ -20,15 +20,15 @@ export default class Dashboard extends React.Component {
     }*/
 
     showQuestion() {        
-      if (this.state.showQuestion !== true) {
+      if (this.props.showQuestion !== true) {
         //return this.showAnswer()
         return this.dispatch(showAnswer())
       }
       else {
-        let currentQuestion = QUESTIONS_LIST[this.state.questionNumber].question || ''
+        let currentQuestion = QUESTIONS_LIST[this.props.questionNumber].question || ''
         let currentAnswerChoices = []
-        for (let i=0; i<QUESTIONS_LIST[this.state.questionNumber].answers.length; i++) {
-          currentAnswerChoices.push(QUESTIONS_LIST[this.state.questionNumber].answers[i])
+        for (let i=0; i<QUESTIONS_LIST[this.props.questionNumber].answers.length; i++) {
+          currentAnswerChoices.push(QUESTIONS_LIST[this.props.questionNumber].answers[i])
         }
         return (
           <div className='question-wrapper'>
@@ -50,13 +50,13 @@ export default class Dashboard extends React.Component {
     }
 
     onAnswer() {
-      let correctAnswer = QUESTIONS_LIST[this.state.questionNumber].correctAnswer
-      if (this.state.answer === correctAnswer) {
-        this.setState({correct: this.state.correct+1, correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: true}
+      let correctAnswer = QUESTIONS_LIST[this.props.questionNumber].correctAnswer
+      if (this.props.answer === correctAnswer) {
+        this.setState({correct: this.props.correct+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: true}
         )
       }
       else {
-        this.setState({incorrect: this.state.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.state.questionNumber+1, showQuestion: false, answerCorrect: false}
+        this.setState({incorrect: this.props.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: false}
       );
       }
      
@@ -70,12 +70,12 @@ export default class Dashboard extends React.Component {
     
 
     showAnswer() {
-      if (this.state.answerCorrect === true) {
+      if (this.props.answerCorrect === true) {
         return (
             <div className="show-answer">
               <main role="main" aria-live="polite">
                 <p className="showanswer-header">Correct!</p>
-                <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+                <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.props.answeredQuestions+1, showQuestion: true})}>Next</button>
               </main>
             </div>
 
@@ -85,8 +85,8 @@ export default class Dashboard extends React.Component {
         return (
           <div className="show-answer">
             <main role="main" aria-live="polite">
-              <p className="showanswer-header">Wrong. The correct answer is {this.state.correctAnswer}.</p>
-              <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.state.answeredQuestions+1, showQuestion: true})}>Next</button>
+              <p className="showanswer-header">Wrong. The correct answer is {this.props.correctAnswer}.</p>
+              <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.props.answeredQuestions+1, showQuestion: true})}>Next</button>
             </main>
           </div>
         )
@@ -97,8 +97,8 @@ export default class Dashboard extends React.Component {
       return (
         <div className='final-score-wrapper'>
             <main role="main" aria-live="polite">
-              <p className="correct-score">Correct: {this.state.correct}</p>
-              <p className="incorrect-score">Incorrect: {this.state.incorrect}</p>
+              <p className="correct-score">Correct: {this.props.correct}</p>
+              <p className="incorrect-score">Incorrect: {this.props.incorrect}</p>
               <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
             </main>
         </div>
@@ -106,7 +106,7 @@ export default class Dashboard extends React.Component {
     }
     
     render() {
-      if (this.state.answeredQuestions === QUESTIONS_LIST.length) {
+      if (this.props.answeredQuestions === QUESTIONS_LIST.length) {
       
         return this.finalScore()
       }
