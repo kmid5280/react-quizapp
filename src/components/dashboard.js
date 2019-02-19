@@ -2,7 +2,7 @@ import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
 import { connect } from 'react-redux';
-import {answerQuestion, answeredCorrect, answeredIncorrect, playAgain} from './actions'
+import {answerQuestion, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from './actions'
 
 export class Dashboard extends React.Component {
 
@@ -21,11 +21,11 @@ export class Dashboard extends React.Component {
     }*/
 
     showQuestion() {        
-      if (this.props.showQuestion !== true) {
+      if (this.props.showQuestion === false) {
         return this.showAnswer()
         //return this.dispatch(showAnswer())
       }
-      else {
+      else if (this.props.showQuestion === true) {
         let currentQuestion = QUESTIONS_LIST[this.props.questionNumber].question || ''
         let currentAnswerChoices = []
         for (let i=0; i<QUESTIONS_LIST[this.props.questionNumber].answers.length; i++) {
@@ -70,7 +70,7 @@ export class Dashboard extends React.Component {
             <div className="show-answer">
               <main role="main" aria-live="polite">
                 <p className="showanswer-header">Correct!</p>
-                <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.props.answeredQuestions+1, showQuestion: true})}>Next</button>
+                <button className="showanswer-next-button" onClick={() => this.dispatch(clickNextButton())}>Next</button>
               </main>
             </div>
 
@@ -81,7 +81,7 @@ export class Dashboard extends React.Component {
           <div className="show-answer">
             <main role="main" aria-live="polite">
               <p className="showanswer-header">Wrong. The correct answer is {this.props.correctAnswer}.</p>
-              <button className="showanswer-next-button" onClick={() => this.setState({answeredQuestions: this.props.answeredQuestions+1, showQuestion: true})}>Next</button>
+              <button className="showanswer-next-button" onClick={() => this.dispatch(clickNextButton())}>Next</button>
             </main>
           </div>
         )
@@ -101,6 +101,7 @@ export class Dashboard extends React.Component {
     }
     
     render() {
+      console.log(this.props)
       if (this.props.answeredQuestions === QUESTIONS_LIST.length) {
       
         return this.finalScore()

@@ -1,4 +1,4 @@
-import {ANSWER_QUESTION, ANSWERED_CORRECT, PLAY_AGAIN} from './actions'
+import {ANSWER_QUESTION, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
 
 const initialState = {
     correct: 0,
@@ -37,6 +37,13 @@ export const Dashboard = (state = initialState, action) => {
             questionNumber: state.questionNumber + 1,
             showQuestion: false,
             answerCorrect: false
+        })
+    }
+
+    if (action.type === CLICK_NEXT_BUTTON) {
+        return Object.assign({}, state, {
+            answeredQuestions: state.answeredQuestions + 1,
+            showQuestion: true
         })
     }
 
