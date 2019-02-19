@@ -1,9 +1,10 @@
 import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
-import { connect } from 'http2';
+import { connect } from 'react-redux';
+import {answerQuestion, answeredCorrect, answeredIncorrect, playAgain} from './actions'
 
-export default class Dashboard extends React.Component {
+export class Dashboard extends React.Component {
 
   /*constructor(props) {
         super(props)
@@ -21,8 +22,8 @@ export default class Dashboard extends React.Component {
 
     showQuestion() {        
       if (this.props.showQuestion !== true) {
-        //return this.showAnswer()
-        return this.dispatch(showAnswer())
+        return this.showAnswer()
+        //return this.dispatch(showAnswer())
       }
       else {
         let currentQuestion = QUESTIONS_LIST[this.props.questionNumber].question || ''
@@ -37,7 +38,7 @@ export default class Dashboard extends React.Component {
               <div className="answer-buttons-wrapper">
                 {currentAnswerChoices.map((answer, index) => {
                   return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
-                    this.setState({answer: answer, showQuestion: false}, () => this.onAnswer())
+                    this.dispatch(answerQuestion(), this.onAnswer())
                     }}>{answer}</button>
                 })}
               </div>
@@ -52,12 +53,13 @@ export default class Dashboard extends React.Component {
     onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.props.questionNumber].correctAnswer
       if (this.props.answer === correctAnswer) {
-        this.setState({correct: this.props.correct+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: true}
-        )
+        //this.setState({correct: this.props.correct+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: true})
+        this.dispatch(answeredCorrect())
+        
       }
       else {
-        this.setState({incorrect: this.props.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: false}
-      );
+        //this.setState({incorrect: this.props.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: false})
+        this.dispatch(answeredIncorrect())
       }
      
     }
@@ -99,7 +101,7 @@ export default class Dashboard extends React.Component {
             <main role="main" aria-live="polite">
               <p className="correct-score">Correct: {this.props.correct}</p>
               <p className="incorrect-score">Incorrect: {this.props.incorrect}</p>
-              <button className="dashboard-playagain-button" onClick={() => this.setState({correct:0, incorrect:0, questionNumber:0, answeredQuestions:0})}>Play again?</button>
+              <button className="dashboard-playagain-button" onClick={() => this.dispatch(playAgain())}>Play again?</button>
             </main>
         </div>
       )
