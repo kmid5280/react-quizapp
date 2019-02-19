@@ -2,7 +2,7 @@ import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
 import { connect } from 'react-redux';
-import {answerQuestion, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from './actions'
+import {answerQuestion, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from '../actions'
 
 export class Dashboard extends React.Component {
 
