@@ -64,13 +64,6 @@ export class Dashboard extends React.Component {
      
     }
 
-    setShowQuestion() {
-      this.setState({
-        showQuestion: true
-      })
-    }
-    
-
     showAnswer() {
       if (this.props.answerCorrect === true) {
         return (
