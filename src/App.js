@@ -10,7 +10,6 @@ import {startGame} from './actions'
 class App extends Component {
     
   render() {
-    console.log(this.props.gamePlay)
     if (this.props.gamePlay === false) {
       return (
         <div>
@@ -21,7 +20,6 @@ class App extends Component {
           <Helmet>
             <html lang={this.props.lang} />
           </Helmet>
-          {/*<Title startGame={() => this.startGame()} />*/}
           <Title startGame={() => this.props.dispatch(startGame())} />
         </div>
       )
