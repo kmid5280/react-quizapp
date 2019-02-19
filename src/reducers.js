@@ -5,7 +5,7 @@ const initialState = {
     gamePlay: false
 }
 
-export default (state = initialState, action) => {
+export const Quiz = (state = initialState, action) => {
     if (action.type === START_GAME) {
         return Object.assign({}, state, {
             gamePlay: true
