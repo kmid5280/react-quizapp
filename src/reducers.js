@@ -1,5 +1,6 @@
 import {START_GAME} from './actions'
-import {ANSWER_QUESTION, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
+import {SUBMIT_ANSWER, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
+import {QUESTIONS_LIST} from './components/questions-list'
 
 const initialState = {
     lang: 'en',
@@ -11,7 +12,8 @@ const initialState = {
     answer: '',
     showQuestion: true,
     answerCorrect: false,
-    correctAnswer: ''
+    correctAnswer: '',
+    currentAnswer: ''
 }
 
 export const Quiz = (state = initialState, action) => {
@@ -20,11 +22,20 @@ export const Quiz = (state = initialState, action) => {
             gamePlay: true
         })
     }
-    if (action.type === ANSWER_QUESTION) {
-        return Object.assign({}, state, {
-            answer: action.answer,
-            showQuestion: false
-        })
+    if (action.type === SUBMIT_ANSWER) {
+        const correctAnswer = QUESTIONS_LIST[state.questionNumber].correctAnswer || ''
+        if (action.payload === correctAnswer) {
+            return Object.assign({}, state, {
+                showQuestion: false,
+                answerCorrect: true
+            })
+        }
+        else if (action.payload !== correctAnswer) {
+            return Object.assign({}, state, {
+                showQuestion: false,
+                answerCorrect: false
+            })
+        }
     }
 
     if (action.type === ANSWERED_CORRECT) {

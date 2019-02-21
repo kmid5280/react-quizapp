@@ -2,7 +2,7 @@ import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
 import { connect } from 'react-redux';
-import {answerQuestion, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from '../actions'
+import {submitAnswer, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from '../actions'
 
 export class Dashboard extends React.Component {
 
@@ -23,7 +23,7 @@ export class Dashboard extends React.Component {
     showQuestion() {        
       if (this.props.showQuestion === false) {
         return this.showAnswer()
-        //return this.dispatch(showAnswer())
+        //return this.props.dispatch(showAnswer())
       }
       else if (this.props.showQuestion === true) {
         let currentQuestion = QUESTIONS_LIST[this.props.questionNumber].question || ''
@@ -38,7 +38,7 @@ export class Dashboard extends React.Component {
               <div className="answer-buttons-wrapper">
                 {currentAnswerChoices.map((answer, index) => {
                   return <button className="dashboard-answer-button" key={index} value={answer} onClick={() => {
-                    this.dispatch(answerQuestion(), this.onAnswer())
+                    return this.props.dispatch(submitAnswer(answer))
                     }}>{answer}</button>
                 })}
               </div>
@@ -52,36 +52,40 @@ export class Dashboard extends React.Component {
 
     onAnswer() {
       let correctAnswer = QUESTIONS_LIST[this.props.questionNumber].correctAnswer
+      console.log(this.props, 'hello')
+      
       if (this.props.answer === correctAnswer) {
         //this.setState({correct: this.props.correct+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: true})
-        this.dispatch(answeredCorrect())
+        this.props.dispatch(answeredCorrect())
         
       }
       else {
         //this.setState({incorrect: this.props.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: false})
-        this.dispatch(answeredIncorrect())
+        this.props.dispatch(answeredIncorrect())
       }
      
     }
 
     showAnswer() {
+      console.log(this.props.answerCorrect)
       if (this.props.answerCorrect === true) {
         return (
             <div className="show-answer">
               <main role="main" aria-live="polite">
                 <p className="showanswer-header">Correct!</p>
-                <button className="showanswer-next-button" onClick={() => this.dispatch(clickNextButton())}>Next</button>
+                <button className="showanswer-next-button" onClick={() => this.props.dispatch(clickNextButton())}>Next</button>
               </main>
             </div>
 
           )
       }
-      else {
+      else if (this.props.answerCorrect === false) {
+        
         return (
           <div className="show-answer">
             <main role="main" aria-live="polite">
               <p className="showanswer-header">Wrong. The correct answer is {this.props.correctAnswer}.</p>
-              <button className="showanswer-next-button" onClick={() => this.dispatch(clickNextButton())}>Next</button>
+              <button className="showanswer-next-button" onClick={() => this.props.dispatch(clickNextButton())}>Next</button>
             </main>
           </div>
         )
@@ -94,20 +98,24 @@ export class Dashboard extends React.Component {
             <main role="main" aria-live="polite">
               <p className="correct-score">Correct: {this.props.correct}</p>
               <p className="incorrect-score">Incorrect: {this.props.incorrect}</p>
-              <button className="dashboard-playagain-button" onClick={() => this.dispatch(playAgain())}>Play again?</button>
+              <button className="dashboard-playagain-button" onClick={() => this.props.dispatch(playAgain())}>Play again?</button>
             </main>
         </div>
       )
     }
     
     render() {
-      console.log(this.props)
-      if (this.props.answeredQuestions === QUESTIONS_LIST.length) {
       
+      if (this.props.answeredQuestions === QUESTIONS_LIST.length) {
         return this.finalScore()
       }
       else {
-        return this.showQuestion()
+        if (this.props.showQuestion === false) {
+          return this.showAnswer()
+        }
+        else if (this.props.showQuestion === true) {
+          return this.showQuestion()
+        }
       }
       
     }

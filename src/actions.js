@@ -3,9 +3,10 @@ export const startGame = () => ({
     type: START_GAME
 })
 
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
-export const answerQuestion = () => ({
-    type: ANSWER_QUESTION
+export const SUBMIT_ANSWER = 'SUBMIT_ANSWER'
+export const submitAnswer = (answer) => ({
+    type: SUBMIT_ANSWER,
+    payload: answer
 })
 
 export const ANSWERED_CORRECT = 'ANSWERED_CORRECT'
