@@ -41,27 +41,6 @@ export const Quiz = (state = initialState, action) => {
         }
     }
 
-    /*if (action.type === ANSWERED_CORRECT) {
-        return Object.assign({}, state, {
-            
-            correctAnswer: state.correctAnswer,
-            questionNumber: state.questionNumber + 1,
-            showQuestion: false,
-            answerCorrect: true
-
-        })
-    }
-
-    if (action.type === ANSWERED_INCORRECT) {
-        return Object.assign({}, state, {
-            incorrect: state.incorrect + 1,
-            correctAnswer: state.correctAnswer,
-            questionNumber: state.questionNumber + 1,
-            showQuestion: false,
-            answerCorrect: false
-        })
-    }*/
-
     if (action.type === CLICK_NEXT_BUTTON) {
         return Object.assign({}, state, {
             answeredQuestions: state.answeredQuestions + 1,
