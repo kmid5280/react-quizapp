@@ -1,4 +1,4 @@
-import {ANSWER_QUESTION, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
+/*import {ANSWER_QUESTION, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
 
 const initialState = {
     correct: 0,
@@ -57,4 +57,4 @@ export const Dashboard = (state = initialState, action) => {
     }
 
     return state
-}
+}*/

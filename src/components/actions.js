@@ -1,6 +1,7 @@
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
+/*export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 export const answerQuestion = () => ({
-    type: ANSWER_QUESTION
+    type: ANSWER_QUESTION,
+    answer
 })
 
 export const ANSWERED_CORRECT = 'ANSWERED_CORRECT'
@@ -21,4 +22,4 @@ export const clickNextButton = () => ({
 export const PLAY_AGAIN = 'PLAY_AGAIN'
 export const playAgain = () => ({
     type: PLAY_AGAIN
-})
+})*/
