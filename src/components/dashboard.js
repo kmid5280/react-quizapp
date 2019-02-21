@@ -6,20 +6,6 @@ import {submitAnswer, answeredCorrect, answeredIncorrect, clickNextButton, playA
 
 export class Dashboard extends React.Component {
 
-  /*constructor(props) {
-        super(props)
-        this.props = {
-            correct: 0,
-            incorrect: 0,
-            questionNumber: 0,
-            answeredQuestions: 0,
-            answer: '',
-            showQuestion: true,
-            answerCorrect: false,
-            correctAnswer: ''
-        }
-    }*/
-
     showQuestion() {        
       if (this.props.showQuestion === false) {
         return this.showAnswer()
@@ -45,25 +31,7 @@ export class Dashboard extends React.Component {
             </main>  
           </div>
         )
-      }
-      
-            
-    }
-
-    onAnswer() {
-      let correctAnswer = QUESTIONS_LIST[this.props.questionNumber].correctAnswer
-      console.log(this.props, 'hello')
-      
-      if (this.props.answer === correctAnswer) {
-        //this.setState({correct: this.props.correct+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: true})
-        this.props.dispatch(answeredCorrect())
-        
-      }
-      else {
-        //this.setState({incorrect: this.props.incorrect+1, correctAnswer: correctAnswer, questionNumber: this.props.questionNumber+1, showQuestion: false, answerCorrect: false})
-        this.props.dispatch(answeredIncorrect())
-      }
-     
+      }      
     }
 
     showAnswer() {
