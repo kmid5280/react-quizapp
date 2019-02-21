@@ -9,8 +9,8 @@ export class Dashboard extends React.Component {
     showQuestion() {        
       if (this.props.showQuestion === false) {
         return this.showAnswer()
-        //return this.props.dispatch(showAnswer())
       }
+      
       else if (this.props.showQuestion === true) {
         let currentQuestion = QUESTIONS_LIST[this.props.questionNumber].question || ''
         let currentAnswerChoices = []
