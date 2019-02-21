@@ -2,7 +2,7 @@ import React from 'react'
 import {QUESTIONS_LIST} from './questions-list'
 import './dashboard.css'
 import { connect } from 'react-redux';
-import {submitAnswer, answeredCorrect, answeredIncorrect, clickNextButton, playAgain} from '../actions'
+import {submitAnswer, clickNextButton, playAgain} from '../actions'
 
 export class Dashboard extends React.Component {
 
@@ -76,6 +76,7 @@ export class Dashboard extends React.Component {
         return this.finalScore()
       }
       else {
+        console.log(this.props.correct)
         if (this.props.showQuestion === false) {
           return this.showAnswer()
         }

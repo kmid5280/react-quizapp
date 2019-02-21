@@ -1,5 +1,4 @@
-import {START_GAME} from './actions'
-import {SUBMIT_ANSWER, ANSWERED_CORRECT, ANSWERED_INCORRECT, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
+import {START_GAME, SUBMIT_ANSWER, PLAY_AGAIN, CLICK_NEXT_BUTTON} from './actions'
 import {QUESTIONS_LIST} from './components/questions-list'
 
 const initialState = {
