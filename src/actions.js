@@ -9,16 +9,6 @@ export const submitAnswer = (answer) => ({
     payload: answer
 })
 
-export const ANSWERED_CORRECT = 'ANSWERED_CORRECT'
-export const answeredCorrect = () => ({
-    type: ANSWERED_CORRECT
-})
-
-export const ANSWERED_INCORRECT = 'ANSWERED_INCORRECT'
-export const answeredIncorrect = () => ({
-    type: ANSWERED_INCORRECT
-})
-
 export const CLICK_NEXT_BUTTON = 'CLICK_NEXT_BUTTON'
 export const clickNextButton = () => ({
     type: CLICK_NEXT_BUTTON
