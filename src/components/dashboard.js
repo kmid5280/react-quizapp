@@ -63,8 +63,7 @@ export class Dashboard extends React.Component {
       return (
         <div className='final-score-wrapper'>
             <main role="main" aria-live="polite">
-              <p className="correct-score">Correct: {this.props.correct}</p>
-              <p className="incorrect-score">Incorrect: {this.props.incorrect}</p>
+              <p className="correct-score">You correctly answered {this.props.correct} questions out of {QUESTIONS_LIST.length}.</p>
               <button className="dashboard-playagain-button" onClick={() => this.props.dispatch(playAgain())}>Play again?</button>
             </main>
         </div>
