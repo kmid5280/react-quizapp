@@ -27,20 +27,23 @@ export const Quiz = (state = initialState, action) => {
         if (action.payload === correctAnswer) {
             return Object.assign({}, state, {
                 showQuestion: false,
-                answerCorrect: true
+                answerCorrect: true,
+                correct: state.correct + 1,
+
             })
         }
         else if (action.payload !== correctAnswer) {
             return Object.assign({}, state, {
                 showQuestion: false,
-                answerCorrect: false
+                answerCorrect: false,
+                incorrect: state.incorrect + 1
             })
         }
     }
 
-    if (action.type === ANSWERED_CORRECT) {
+    /*if (action.type === ANSWERED_CORRECT) {
         return Object.assign({}, state, {
-            correct: state.correct + 1,
+            
             correctAnswer: state.correctAnswer,
             questionNumber: state.questionNumber + 1,
             showQuestion: false,
@@ -57,11 +60,12 @@ export const Quiz = (state = initialState, action) => {
             showQuestion: false,
             answerCorrect: false
         })
-    }
+    }*/
 
     if (action.type === CLICK_NEXT_BUTTON) {
         return Object.assign({}, state, {
             answeredQuestions: state.answeredQuestions + 1,
+            questionNumber: state.questionNumber + 1,
             showQuestion: true
         })
     }

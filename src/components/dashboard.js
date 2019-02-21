@@ -67,7 +67,6 @@ export class Dashboard extends React.Component {
     }
 
     showAnswer() {
-      console.log(this.props.answerCorrect)
       if (this.props.answerCorrect === true) {
         return (
             <div className="show-answer">
@@ -80,11 +79,11 @@ export class Dashboard extends React.Component {
           )
       }
       else if (this.props.answerCorrect === false) {
-        
+        const correctAnswer = QUESTIONS_LIST[this.props.questionNumber].correctAnswer
         return (
           <div className="show-answer">
             <main role="main" aria-live="polite">
-              <p className="showanswer-header">Wrong. The correct answer is {this.props.correctAnswer}.</p>
+              <p className="showanswer-header">Wrong. The correct answer is {correctAnswer}.</p>
               <button className="showanswer-next-button" onClick={() => this.props.dispatch(clickNextButton())}>Next</button>
             </main>
           </div>
