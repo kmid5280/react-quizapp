@@ -13,4 +13,4 @@ Recently updated to version 1.1, now using Redux!
 
 ## Technologies
 
-Technologies used for this app include React, JavaScript, CSS, and JSX. App is deployed to Heroku. Content layout is achieved with Flexbox. Multiple tests for the components are written using Enzyme, to test the app's overall functionality. This app strives to follow a11y best practices by utilizing React Helmet to implement the language attribute, using aria-live settings and landmark roles, and by providing sufficient font size and color contrast.
+Technologies used for this app include React, Redux, JavaScript, CSS, and JSX. App is deployed to Heroku. Content layout is achieved with Flexbox. Multiple tests for the components are written using Enzyme, to test the app's overall functionality. This app strives to follow a11y best practices by utilizing React Helmet to implement the language attribute, using aria-live settings and landmark roles, and by providing sufficient font size and color contrast.
